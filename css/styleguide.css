@@ -1,0 +1,40 @@
+body {
+  color: #000000;
+  font-family: Lato, sans-serif;
+  font-weight: 400;
+  margin: 36px 0;
+  padding: 0;
+}
+
+a:link, a:visited, a:hover, a:active {
+  outline: none;
+  text-decoration: none;
+  img {
+    border: 0;
+    outline: none;
+  }
+}
+a:link { color: #cc0000; }
+a:visited { color: #cc0000; }
+a:hover { color: #ee0000; }
+a:active { color: #ee0000; }
+
+#wrapper {
+  margin: auto;
+  min-width: 300px;
+  width: 75%;
+}
+
+h1 {
+  color: #cc0000;
+  margin-bottom: 36px;
+}
+
+#wrapper > section {
+  border-bottom: 3px double #cccccc;
+  padding-bottom: 16px;
+}
+
+#wrapper > section > section {
+  padding-bottom: 16px;
+}

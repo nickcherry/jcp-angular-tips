@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Javascript / Angular Styleguide</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/styleguide.css" />
+  </head>
+  
+  <body>
+    
+    <div id="wrapper">
+
+      <h1>Angular Tips for JCPenney.com</h1>
+
+      <!-- ///////////////////////////////////////////////////////////////////////////// -->
+
+      <section>
+
+        <h2>Overview of Angular Components</h2>
+
+        <section>
+
+          <h3>Models</h3>
+
+          <p>
+            Unlike most of the components we'll cover, Angular has few opinions on how to manage your models. Whereas frameworks like <a href="http://backbonejs.org/#Model" target="_blank">Backbone</a> or <a href="http://backbonejs.org/#Model" target="_blank">Ember.js</a> have special objects to model data, Angular requires nothing more than a plain old javascript object. Considering the size and complexity of the JCPenney website, however, we would be missing out on a great opportunity to DRY our code if we didn't fatten up our models with some extra functionality.
+          </p>
+
+          <p>
+            Consider the example <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/product.coffee" target="_blank">Product</a> model below, which inherits from a bare-bones <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/base.coffee" target="_blank">ModelBase</a>.
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/2cc6b5d786a30f80f12d.js"></script>
+
+          <p>
+            While its business logic is certainly oversimplified, hopefully the potential value of a more formally typed object (as opposed to a simple data holder) is becoming apparent. Below is second example, a very simple <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/review.coffee" target="_blank">Review</a> model, which could be useful for parts of the site that call for an average rating.
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/96e554b1c2cd70d32de7.js"></script>
+
+        </section>
+
+        <section>
+          <h3>Factories</h3>
+        </section>
+
+        <section>
+          <h3>Controllers</h3>
+        </section>
+
+        <section>
+          <h3>Services</h3>
+        </section>
+
+        <section>
+          <h3>Views</h3>
+        </section>
+
+        <section>
+          <h3>Directives</h3>
+        </section>
+
+        <section>
+          <h3>Filters</h3>
+        </section>
+
+      </section>
+
+      <!-- ///////////////////////////////////////////////////////////////////////////// -->
+
+      <section>
+
+        <h2>App Structure</h2>
+
+      </section>
+
+      <!-- ///////////////////////////////////////////////////////////////////////////// -->
+
+      <section>
+
+        <h2>Task Runners</h2>
+
+      </section>
+
+      <!-- ///////////////////////////////////////////////////////////////////////////// -->
+
+      <section>
+
+        <h2>Resources</h2>
+
+      </section>
+
+      <!-- ///////////////////////////////////////////////////////////////////////////// -->
+
+    </div>
+
+  </body>
+</html>
