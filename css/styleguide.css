@@ -3,6 +3,7 @@ body {
   font-family: Lato, sans-serif;
   font-size: 16px;
   font-weight: 400;
+  line-height: 1.35em;
   margin: 36px 0;
   padding: 0;
 }
@@ -20,6 +21,28 @@ a:visited { color: #cc0000; }
 a:hover { color: #ee0000; }
 a:active { color: #ee0000; }
 
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+  margin: 1.5em 10px;
+  padding: 0.75em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+  color: #cccccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.01em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+blockquote p {
+  display: inline;
+}
+
 #wrapper {
   margin: auto;
   min-width: 300px;
@@ -36,8 +59,8 @@ code {
   border: 1px solid #dedede;
   font-size: 14px;
   margin: 0 2px;
-  padding: 2px 4px;
-  vertical-align: text-bottom;
+  padding: 2px 3px;
+  vertical-align: middle;
 }
 
 #wrapper > section {

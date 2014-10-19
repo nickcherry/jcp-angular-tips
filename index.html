@@ -30,7 +30,7 @@
           </p>
 
           <p>
-            Consider the example <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/product.coffee" target="_blank">Product</a> model below, which inherits from a bare-bones <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/base.coffee" target="_blank">ModelBase</a>.
+            Take a look at the example <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/product.coffee" target="_blank">Product</a> model below, which inherits from a bare-bones <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/base.coffee" target="_blank">ModelBase</a>.
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/2cc6b5d786a30f80f12d.js"></script>
@@ -42,13 +42,39 @@
           <script src="https://gist.github.com/jcpinnovation/96e554b1c2cd70d32de7.js"></script>
 
           <p>
-            It's worth noting that each of the above-mentioned model classes is the return value for its own Angular service. This allows us to inject the model as a dependency like we would any other Angular module, and because <a href="https://docs.angularjs.org/guide/services" target="_blank">services are singletons</a>, we don't have to worry about the class being defined more than once. We can even build subclasses, as can be seen in both of the above examples (inheriting from <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/base.coffee" target="_blank">ModelBase</a>) or in <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/department.coffee" target="_blank">this Department model</a>, which is a subclass of <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/category.coffee" target="_blank">Category</a>, which is a subclass of <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/base.coffee" target="_blank">ModelBase</a>. Once the dependency has been injected, instantiating a new instance is just a matter of typing <code>new Product(data)</code>. But where does this <code>data</code> come from and where should models get instantiated, you ask? We'll talk about that in the next section.
+            It's worth noting that each of the above-mentioned model classes is the return value for its own Angular Service. This allows us to inject the model as a dependency like we would any other Angular module, and because <a href="https://docs.angularjs.org/guide/services" target="_blank">services are singletons</a>, we don't have to worry about the class being defined more than once. We can even build subclasses, as can be seen in both of the above examples (inheriting from <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/base.coffee" target="_blank">ModelBase</a>) or in <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/department.coffee" target="_blank">this Department model</a>, which is a subclass of <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/category.coffee" target="_blank">Category</a>, which is a subclass of <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/base.coffee" target="_blank">ModelBase</a>. Once the dependency has been injected, instantiating a new instance is just a matter of typing <code>new Product(data)</code>. But where does this <code>data</code> come from, and where should models get instantiated, you ask? We'll talk about that in the next section.
           </p>
 
         </section>
 
         <section>
+
           <h3>Factories</h3>
+          
+          <p>
+            As a rule of thumb, API calls and model instantiation should always be handled by a (lowercase-s) service. When it comes to choosing exactly which type of service to employ, we the following at our disposal, in order of increasing complexity: Services, Factories, and Providers. In most cases, we won't require service configuration during the <code>module.config</code> phase, <a href="http://demisx.github.io/angularjs/2014/09/14/angular-what-goes-where.html" target="_blank">so let's set Providers aside</a>. Services <i>could</i> get the job done, but Factories are probably a better option; as <i><a href="http://www.amazon.com/dp/1782161821/?tag=stackoverfl08-20" target="_blank">Mastering Web Application Development with AngularJS</a></i> eloquently puts it:
+          </p>
+
+          <blockquote>
+            The factory method is the most common way of getting objects into AngularJS dependency injection system. It is very flexible and can contain sophisticated creation logic. Since factories are regular functions, we can also take advantage of a new lexical scope to simulate "private" variables. This is very useful as we can hide implementation details of a given service. 
+          </blockquote>
+
+          <p>
+            Now that we've decided on the Factory as our data-fetching-and-model-instantiation service of choice, let's talk about how to interact with our API. The obvious answer might be to use Angular's core <a href="https://docs.angularjs.org/api/ng/service/$http" target="_blank">$http</a> service, and this approach would be perfectly acceptable. However, considering the RESTful nature of JCPenney's API, we can take the abstraction up a level and really DRY out our code with Angular's <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> factory. Take a look at the very naive Department factory below. (In case you're wondering, <a href="https://gist.github.com/jcpinnovation/ec7a670995fb68dd298b" target="_blank">here is the Config service</a> we're injecting.)
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/73312408ba3dc793c847.js"></script>
+
+          <p>
+            With just two lines of code, we've enabled <a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete" target="_blank">CRUD</a> functionality for our Department factory. The JCPenney REST API currently doesn't respond to create, update, or delete requests, so let's forget about those for the time being. We can now fetch data for all departments or a single department with the following code:
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/3495e0cc2a794205e1fb.js"></script>
+
+          <p>
+            You might be thinking, "Well, that's nice, but what if we have a resource that requires more than the basic CRUD operations?" It's pretty easy to do, but hold that thought for a moment. First, let's look at how we can cast the API responses as models, like the ones we covered in above section.
+          </p>
+
         </section>
 
         <section>
