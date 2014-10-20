@@ -3,7 +3,7 @@
   
   <head>
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <title>Javascript / Angular Styleguide</title>
+    <title>Angular Tips for JCPenney.com</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/styleguide.css" />
@@ -60,20 +60,38 @@
           </blockquote>
 
           <p>
-            Factories sound like a good fit. So, now that we've decided on our data-fetching-and-model-instantiation service of choice, let's talk about how to interact with our API. The obvious answer might be to use Angular's core <a href="https://docs.angularjs.org/api/ng/service/$http" target="_blank">$http</a> service, and this approach would be perfectly acceptable. However, considering the RESTful nature of JCPenney's API, we can take the abstraction up a level and really DRY out our code with Angular's <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> factory. Take a look at the very naive Department Factory below. (In case you're wondering, <a href="https://gist.github.com/jcpinnovation/ec7a670995fb68dd298b" target="_blank">here is the Config service</a> we're injecting.)
+            Factories sound like a good fit, dont't they? Now that we've decided on our data-fetching-and-model-instantiation service of choice, let's talk about how to interact with our API. The obvious answer might be to use Angular's core <a href="https://docs.angularjs.org/api/ng/service/$http" target="_blank">$http</a> service, and this approach would be perfectly acceptable. However, considering the RESTful nature of JCPenney's API, we can take the abstraction up a level and really DRY out our code with Angular's <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> factory. Take a look at the very naive DepartmentFactory below. (In case you're wondering, <a href="https://gist.github.com/jcpinnovation/ec7a670995fb68dd298b" target="_blank">here is the Config service</a> we're injecting.)
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/73312408ba3dc793c847.js"></script>
 
           <p>
-            With a single line of code, we've enabled <a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete" target="_blank">CRUD</a> functionality for our Department Factory. The JCPenney REST API currently doesn't respond to create, update, or delete requests, so let's forget about those for the time being. We can now fetch data for all departments or a single department with the following code:
+            With a single line of code, we've enabled <a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete" target="_blank">CRUD</a> functionality for our DepartmentFactory. The JCPenney REST API currently doesn't respond to create, update, or delete requests, so let's forget about those for now. With our factory in place, we can fetch data for all departments or a single department with the following code:
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/3495e0cc2a794205e1fb.js"></script>
 
           <p>
-            You might be thinking, "Well, that's nice, but what if we have resources that require more than the basic CRUD operations?" It's pretty easy to address, but hold that thought for a moment. First, let's look at how we can cast the API responses as models, like the ones we discussed in the previous section.
+            You might be thinking, "Well, that's nice, but what if we have resources that require more than the basic CRUD operations?" It's pretty easy to address, but hold that thought for a moment. First, let's see how we can cast the API responses as models, like the ones we discussed in the previous section.
           </p>
+
+          <p>
+            The key to transforming our API response data into more useful models is <a href="https://docs.angularjs.org/api/ng/service/$http" target="_blank">$http</a>'s <code>transformResponse</code> hook, which is conveniently exposed by <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a>. With a relatively small amount of setup code, we can create a <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/factories/base.coffee">FactoryBase</a> service, providing convenience methods to generate JSON-to-model transforms for the majority of our API requests.
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/407c02bceb6c18c027cf.js"></script>
+
+          <p>
+            With DepartmentFactory inheriting from FactoryBase, we can can easily generate custom actions to override the <code>transformResponse</code> functions for <code>GET /departments</code> and <code>GET /departments/:id</code>, like so:
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/b55becd4fe2b5808b53f.js"></script>
+
+          <p>
+            Now, instead of <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> returning vanilla javascript objects with no functionality, we'll receive typed Department models. Neat, huh?
+          </p>
+
+          
 
         </section>
 
