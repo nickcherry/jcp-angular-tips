@@ -88,10 +88,20 @@
           <script src="https://gist.github.com/jcpinnovation/b55becd4fe2b5808b53f.js"></script>
 
           <p>
-            Now, instead of <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> returning vanilla javascript objects with no functionality, we'll receive typed Department models. Neat, huh?
+            Now, instead of <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> returning vanilla javascript objects with no functionality, we'll get typed Department models. Neat, huh?
           </p>
 
-          
+          <p>
+            We've got the hardest part out of the way, so let's get back to your question about accessing resource endpoints beyond the basic CRUD operations. Consider the <code>GET product/:id/reviews</code> endpoint, which returns reviews associated with a given product. After implementing the boilerplate Factory code (to inherit from <a href="https://gist.github.com/jcpinnovation/407c02bceb6c18c027cf" target="_blank">FactoryBase</a> and override <code>transformResponse</code> for both <code>GET</code> methods), we need only add four lines of Coffeescript to add support for our product reviews endpoint.
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/9c51438958c471dfe33d.js"></script>
+
+          <p>
+            Notice that we're passing the <a href="https://gist.github.com/jcpinnovation/96e554b1c2cd70d32de7" target="_blank">Review</a> model to <code>generateArrayTransformFunctionForModel</code>, as well as specifying the optional <code>arrayPath</code> argument. The latter tells our helper method to look to the <code>reviews</code> property for its data. If this doesn't make sense right away, take a look at <a href="http://api.jcpenney.com/v2/products/pp5002690485/reviews" target="_blank">a sample product review response</a>. The <code>isArray</code> option is required by <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> and simply tells the service we'll be returning data in the form of an array, not an object. The code below demonstrates how we actually go about calling our new action.
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/1c95ed19a8370c59c79f.js"></script>
 
         </section>
 
