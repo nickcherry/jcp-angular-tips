@@ -72,17 +72,23 @@
           <script src="https://gist.github.com/jcpinnovation/3495e0cc2a794205e1fb.js"></script>
 
           <p>
-            You might be thinking, "Well, that's nice, but what if we have resources that require more than the basic CRUD operations?" It's pretty easy to address, but hold that thought for a moment. First, let's see how we can cast the API responses as models, like the ones we discussed in the previous section.
+            You might be thinking, "Well, that's nice, but what if we have resources that require more than the basic CRUD operations?" It's pretty easy to address, but hold that thought for a moment. First, let's see how we can cast our API responses as models, like the ones we discussed in the previous section.
           </p>
 
           <p>
-            The key to transforming our API response data into more useful models is <a href="https://docs.angularjs.org/api/ng/service/$http" target="_blank">$http</a>'s <code>transformResponse</code> hook, which is conveniently exposed by <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a>. With a relatively small amount of setup code, we can create a <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/factories/base.coffee">FactoryBase</a> service, providing convenience methods to generate JSON-to-model transforms for our API responses and basic actions for creating, updating, and destroying our custom models on the server.
+            The key to transforming our API response data into more useful models is <a href="https://docs.angularjs.org/api/ng/service/$http" target="_blank">$http</a>'s <code>transformResponse</code> hook, which is conveniently exposed by <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a>. With a relatively small amount of setup code, we can create a <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/factories/base.coffee">FactoryBase</a> service, providing convenience methods to generate JSON-to-model transforms for our API responses and configuring basic actions for creating, updating, and destroying our custom models on the server.
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/407c02bceb6c18c027cf.js"></script>
 
           <p>
-            With DepartmentFactory inheriting from FactoryBase and calling <code>generateResourceForModel</code>, our <code>GET</code> requests will return Department models (rather than vanilla javascript objects) and we can now pass our custom models as arguments to create, update, and destroy remote resources. Again, the JCPenney API doesn't currently support mutative actions for Departments, but for the sake of this example, let's pretend it does. The code below shows how we would execute all five CRUD operations with DepartmentFactory:
+            Next, we'll have DepartmentFactory can extend FactoryBase and call <code>generateResourceForModel</code> to generate its default actions:
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/b55becd4fe2b5808b53f.js"></script>
+
+          <p>
+            Now <code>GET</code> requests will return Department models (rather than vanilla javascript objects) and we can now pass our custom models as arguments to create, update, and destroy remote resources. Again, the JCPenney API doesn't currently support mutative actions for Departments, but for the sake of this example, let's pretend it does. The code below shows how we would execute all five CRUD operations with DepartmentFactory:
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/e47865929d53089b6db0.js"></script>
