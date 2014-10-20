@@ -103,6 +103,18 @@
 
           <script src="https://gist.github.com/jcpinnovation/1c95ed19a8370c59c79f.js"></script>
 
+          <p>
+            And lastly, before moving onto the next section, let's take a moment to acknowledge one of the <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> module's most beautiful features. From Angular's documentation: 
+          </p>
+
+          <blockquote>
+            It is important to realize that invoking a $resource object method immediately returns an empty reference (object or array depending on isArray). Once the data is returned from the server the existing reference is populated with the actual data. This is a useful trick since usually the resource is assigned to a model which is then rendered by the view. Having an empty object results in no rendering, once the data arrives from the server then the object is populated with the data and the view automatically re-renders itself showing the new data. This means that in most cases one never has to write a callback function for the action methods.
+          </blockquote>
+
+          <p>
+            Because our Factory methods immediately return an empty object/array, then populate that object/array and automatically re-render any relevant views when the data arrives, oftentimes we'll have no need for a callback. As we'll see in the next section, this will be hugely beneficial in keeping our Controllers lean.
+          </p>
+
         </section>
 
         <section>
