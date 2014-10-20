@@ -76,23 +76,19 @@
           </p>
 
           <p>
-            The key to transforming our API response data into more useful models is <a href="https://docs.angularjs.org/api/ng/service/$http" target="_blank">$http</a>'s <code>transformResponse</code> hook, which is conveniently exposed by <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a>. With a relatively small amount of setup code, we can create a <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/factories/base.coffee">FactoryBase</a> service, providing convenience methods to generate JSON-to-model transforms for the majority of our API requests.
+            The key to transforming our API response data into more useful models is <a href="https://docs.angularjs.org/api/ng/service/$http" target="_blank">$http</a>'s <code>transformResponse</code> hook, which is conveniently exposed by <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a>. With a relatively small amount of setup code, we can create a <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/factories/base.coffee">FactoryBase</a> service, providing convenience methods to generate JSON-to-model transforms for our API responses and basic actions for creating, updating, and destroying our custom models.
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/407c02bceb6c18c027cf.js"></script>
 
           <p>
-            With DepartmentFactory inheriting from FactoryBase, we can can generate custom actions to override the <code>transformResponse</code> functions for <code>GET /departments</code> and <code>GET /departments/:id</code>, like so:
+            With DepartmentFactory inheriting from FactoryBase, our <code>GET</code> requests will return Department models (rather than vanilla javascript objects), and we can now pass our custom models as arguments to create, update, and destroy remote resources. Again, the JCPenney API doesn't currently support mutative actions for Departments, but for the sake of our example, let's pretend it does. The code below shows how we would execute all five CRUD operations with DepartmentFactory:
           </p>
 
-          <script src="https://gist.github.com/jcpinnovation/b55becd4fe2b5808b53f.js"></script>
+          <script src="https://gist.github.com/jcpinnovation/e47865929d53089b6db0.js"></script>
 
           <p>
-            Now, instead of <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> returning vanilla javascript objects with no functionality, we'll get typed Department models. Neat, huh?
-          </p>
-
-          <p>
-            We've got the hardest part out of the way, so let's get back to your question about accessing resource endpoints beyond the basic CRUD operations. Consider the <code>GET product/:id/reviews</code> endpoint, which returns reviews associated with a given product. After implementing the boilerplate factory code (to inherit from <a href="https://gist.github.com/jcpinnovation/407c02bceb6c18c027cf" target="_blank">FactoryBase</a> and override <code>transformResponse</code> for both <code>GET</code> methods), we only need to add four lines of Coffeescript to provide support for our product reviews endpoint.
+            Neat, huh? We've got the hardest part out of the way, so let's get back to your question about accessing resource endpoints beyond the basic CRUD operations. Consider the <code>GET product/:id/reviews</code> endpoint, which returns reviews associated with a given product. After implementing the boilerplate factory code (to inherit from <a href="https://gist.github.com/jcpinnovation/407c02bceb6c18c027cf" target="_blank">FactoryBase</a> and override <code>transformResponse</code> for both <code>GET</code> methods), we only need to add four lines of Coffeescript to provide support for our product reviews endpoint.
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/9c51438958c471dfe33d.js"></script>
@@ -118,7 +114,13 @@
         </section>
 
         <section>
+
           <h3>Controllers</h3>
+
+          <p>
+            
+          </p>
+
         </section>
 
         <section>
