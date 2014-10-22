@@ -124,10 +124,6 @@
           <h3>Controllers</h3>
 
           <p>
-            This section will be a short one, because if we're doing everything right, our controllers will contain very little code.
-          </p>
-
-          <p>
             To borrow from Todd Motto's <a href="http://toddmotto.com/rethinking-angular-js-controllers" target="_blank">"Rethinking AngularJS Controllers"</a>, the primary role of an AngularJS controller is to bring logic together; it should trigger model and view changes, but avoid getting involved in the details of their operations. The responsibility of updating models should be left to factories or the models themselves. Likewise, any changes to the UI should be addressed by directives or the views themselves.
           </p>
 
@@ -140,7 +136,7 @@
           <script src="https://gist.github.com/jcpinnovation/d45b5fa770340da9c29a.js"></script>
 
           <p>
-            If you remember from the Factories section, <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> actions immediately return an empty reference (object or array depending on isArray), then populate the object/array with data when the response arrives. This means that we don't have to setup any callbacks. The above code is all we need to give our view access to its models. 
+            If you remember from the Factories section, <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> actions immediately return an empty reference, then populate the object/array with data when the response arrives. This means that we don't have to setup any callbacks in our controller. The above code is all we need to give our view access to its models. 
           </p>
 
 
