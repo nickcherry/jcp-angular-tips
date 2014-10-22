@@ -128,7 +128,13 @@
           </p>
 
           <p>
-            Let's quickly add support for querying product recommendations to our ProductFactory, then, we'll look at how ProductController can give its product-detail view access to the Product, Recommendation, and Review models it needs. (In case you're wondering, <code>$stateParams</code> is service provided by <a href="https://github.com/angular-ui/ui-router" target="_blank">Angular's ui-router</a>. In this example, we're using it to access the <code>productId</code> parameter in the URL.)
+            <b>
+              If we're doing everything right, our controllers will contain very little code.
+            </b>
+          </p>
+
+          <p>
+            Let's quickly add support for querying product recommendations to our ProductFactory, then we'll look at how ProductController can give its view access to the Product, Recommendation, and Review models it needs. (In case you're wondering, <code>$stateParams</code> is a service provided by <a href="https://github.com/angular-ui/ui-router" target="_blank">Angular's ui-router</a>. In this example, we're using it to access the <code>productId</code> parameter in the URL.)
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/eb9cdd80eab15a053aa3.js"></script>
@@ -139,6 +145,30 @@
             If you remember from the Factories section, <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> actions immediately return an empty reference, then populate the object/array with data when the response arrives. This means that we don't have to setup any callbacks in our controller. The above code is all we need to give our view access to its models. 
           </p>
 
+          <p>
+            Now, for our ProductController view, let's pretend we're using the markup below. This contrived example includes:
+            <ol>
+              <li>basic product information (name, description, image)</li>
+              <li>a naive form for selecting product options, specifying quantity, and adding to bag</li>
+              <li>reviews for the given product</li>
+              <li>recommendations for the given product</li>
+            </ol>
+
+            Don't worry if the lack of modularity grosses you out; we'll get to that in the Directives section. <img class="emoji" alt=":)" src="img/wink.png">
+
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/225faad4faed76493d6c.js"></script>
+
+          <p>
+            With its built-in directives, Angular can take care of our form's data-binding and even help out with validation, but we'll still need to handle the add-to-bag functionality ourselves. Notice the opening tag of our view's <code>form</code> element. It specifies a name <code>productForm</code> and submit action <code>ng-submit="addToBag(product)"</code>. Let's add a method to our scope, so we can respond to the <code>addToBag</code> call. The handler should verify that the form data is valid, then facilitate the hand-off of our product to the shopping bag. For the sake of simplicity, assume that Bag is a singleton model that exposes an <code>add</code> method for adding products.
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/b30e395549b67227e6fb.js"></script>
+
+          <p>
+            Well, that wasn't so bad. And our ProductController is still pretty thin at eight lines of code. For an unsophisticated view, implementing an <code>addToBag</code> handler like this would be perfectly acceptable. But in reality, JCPenney's product detail page is going to involve much more functionality that's tied to UI events (think liking/saving products, writing reviews, forms for monogramming, accordion menus, etc). While we <i>could</i> just throw this all under one controller, there's a better way, which will help keep our code organized and reusable. In the next section, we'll talk about directives.
+          </p>
 
         </section>
 
