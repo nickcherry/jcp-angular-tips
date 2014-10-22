@@ -124,25 +124,31 @@
           <h3>Controllers</h3>
 
           <p>
-            
+            This section will be a short one, because if we're doing everything right, our controllers will contain very little code.
           </p>
 
-        </section>
+          <p>
+            To borrow from Todd Motto's <a href="http://toddmotto.com/rethinking-angular-js-controllers" target="_blank">"Rethinking AngularJS Controllers"</a>, the primary role of an AngularJS controller is to bring logic together; it should trigger model and view changes, but avoid getting involved in the details of their operations. The responsibility of updating models should be left to factories or the models themselves. Likewise, any changes to the UI should be addressed by directives or the views themselves.
+          </p>
 
-        <section>
-          <h3>Services</h3>
-        </section>
+          <p>
+            Let's quickly add support for querying product recommendations to our ProductFactory, then, we'll look at how ProductController can give its product-detail view access to the Product, Recommendation, and Review models it needs. (In case you're wondering, <code>$stateParams</code> is service provided by <a href="https://github.com/angular-ui/ui-router" target="_blank">Angular's ui-router</a>. In this example, we're using it to access the <code>productId</code> parameter in the URL.)
+          </p>
 
-        <section>
-          <h3>Views</h3>
+          <script src="https://gist.github.com/jcpinnovation/eb9cdd80eab15a053aa3.js"></script>
+          
+          <script src="https://gist.github.com/jcpinnovation/d45b5fa770340da9c29a.js"></script>
+
+          <p>
+            If you remember from the Factories section, <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> actions immediately return an empty reference (object or array depending on isArray), then populate the object/array with data when the response arrives. This means that we don't have to setup any callbacks. The above code is all we need to give our view access to its models. 
+          </p>
+
+
         </section>
 
         <section>
           <h3>Directives</h3>
-        </section>
-
-        <section>
-          <h3>Filters</h3>
+          <p>Coming soon!</p>
         </section>
 
       </section>
@@ -153,6 +159,8 @@
 
         <h2>App Structure</h2>
 
+        <p>Coming soon!</p>
+
       </section>
 
       <!-- ///////////////////////////////////////////////////////////////////////////// -->
@@ -160,16 +168,10 @@
       <section>
 
         <h2>Task Runners</h2>
+        <p>Coming soon!</p>
 
       </section>
 
-      <!-- ///////////////////////////////////////////////////////////////////////////// -->
-
-      <section>
-
-        <h2>Resources</h2>
-
-      </section>
 
       <!-- ///////////////////////////////////////////////////////////////////////////// -->
 
