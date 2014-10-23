@@ -56,7 +56,9 @@
           </p>
 
           <blockquote>
-            The factory method is the most common way of getting objects into AngularJS dependency injection system. It is very flexible and can contain sophisticated creation logic. Since factories are regular functions, we can also take advantage of a new lexical scope to simulate "private" variables. This is very useful as we can hide implementation details of a given service. 
+            <p>
+              The factory method is the most common way of getting objects into AngularJS dependency injection system. It is very flexible and can contain sophisticated creation logic. Since factories are regular functions, we can also take advantage of a new lexical scope to simulate "private" variables. This is very useful as we can hide implementation details of a given service. 
+            </p>
           </blockquote>
 
           <p>
@@ -110,7 +112,9 @@
           </p>
 
           <blockquote>
-            It is important to realize that invoking a $resource object method immediately returns an empty reference (object or array depending on isArray). Once the data is returned from the server the existing reference is populated with the actual data. This is a useful trick since usually the resource is assigned to a model which is then rendered by the view. Having an empty object results in no rendering, once the data arrives from the server then the object is populated with the data and the view automatically re-renders itself showing the new data. This means that in most cases one never has to write a callback function for the action methods.
+            <p>
+              It is important to realize that invoking a $resource object method immediately returns an empty reference (object or array depending on isArray). Once the data is returned from the server the existing reference is populated with the actual data. This is a useful trick since usually the resource is assigned to a model which is then rendered by the view. Having an empty object results in no rendering, once the data arrives from the server then the object is populated with the data and the view automatically re-renders itself showing the new data. This means that in most cases one never has to write a callback function for the action methods.
+            </p>
           </blockquote>
 
           <p>
@@ -173,8 +177,38 @@
         </section>
 
         <section>
+
           <h3>Directives</h3>
-          <p>Coming soon!</p>
+          
+          <p>
+            We've alluded to directives a few times up to this point. You might be wondering, "What exactly <i>are</i> these mysterious entities?" The <a href="https://docs.angularjs.org/guide/directive" target="_blank">official AngularJS documentation</a> is a bit technical, but hopefully begins to paint the picture:
+          </p>
+
+          <blockquote>
+            <p>
+              At a high level, directives are markers on a DOM element (such as an attribute, element name, comment or CSS class) that tell AngularJS's HTML compiler ($compile) to attach a specified behavior to that DOM element or even transform the DOM element and its children.
+            </p>
+          </blockquote>
+
+          <p>
+            One very important feature that the above definition fails to acknolwedge is that directives can manage their own scopes, as well as inherit those of their parent controllers. This means directives can function as "mini-controllers" of sorts, enabling us to better encapsulate and re-use components. The following excerpt from <a href="https://leanpub.com/web-component-development-with-angularjs/read" target="_blank">Web Component Architecture &amp; Development with AngularJS</a> elaborites on this idea:
+          </p>
+
+          <blockquote>
+            <p>
+              One of the most useful and powerful features of AngularJS is directives. AngularJS directives are a framework convention for creating custom extensions to HTML that can encapsulate both the view and behavior of a UI component such as a site search bar in a way that can limit external dependencies, as well as providing for very flexible configuration parameters that any application or container level code may wish to provide.
+            </p>
+            <p>
+              The AngularJS team state that using AngularJS is a way to overcome the primary shortcoming of HTML, mainly that it was designed for static presentation not dynamic, data driven interaction and presentation- a key feature of today's web. Because HTML has not evolved to provide dynamic presentation, JavaScript frameworks have risen to fill the gap, the most popular being jQuery.
+            </p>
+            <p>
+              jQuery gives us common boilerplate code for querying the DOM, binding and listening for user or browser events, and then imperatively updating or "re-painting" the DOM in response. This was great when web applications were simple. But web applications have grown very complex, and the boilerplate code can add up to thousands of lines of source mixed in with the actual application logic.
+            </p>
+            <p>
+              AngularJS removes the boilerplate, thus allowing JavaScript developers to opportunity to concentrate solely on the business logic of the application, and in a way that hard dependencies to the DOM are removed.
+            </p>
+          </blockquote>
+
         </section>
 
       </section>

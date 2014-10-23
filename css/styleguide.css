@@ -33,17 +33,38 @@ blockquote {
   quotes: "\201C""\201D""\2018""\2019";
 }
 
-blockquote:before {
+blockquote:before, blockquote:after {
   color: #cccccc;
-  content: open-quote;
   font-size: 4em;
+}
+
+blockquote:before {
+  content: open-quote;
   line-height: 0.01em;
-  margin-right: 0.25em;
+  margin-right: 0.15em;
   vertical-align: -0.4em;
+}
+
+blockquote:after {
+  content: close-quote;
+  font-size: 0;
+  line-height: 0;
+  visibility: hidden;
 }
 
 blockquote p {
   display: inline;
+}
+
+blockquote p:after {
+  clear: both;
+  content: " ";
+  display: table;
+  margin-bottom: 20px;
+}
+
+blockquote p:last-child:after {
+  display: none;
 }
 
 #wrapper {
