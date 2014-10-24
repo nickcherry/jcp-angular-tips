@@ -291,8 +291,14 @@
 
           <script src="https://gist.github.com/jcpinnovation/7e6da31bf09c3d73dc79.js"></script>
 
+          <script src="https://gist.github.com/jcpinnovation/b8745980268802f3fbdc.js"></script>
+
           <p>
-            The <code>restrict</code>, <code>scope</code>, <code>replace</code>, and <code>templateUrl</code> properties should all look familiar, but in this example, we're introducing a new player: <code>controller</code>. As the name suggests, it works just like the view controllers we've seen before! The only difference is that our directive controller is given the option of inheriting its scope or creating an isolated scope (like we've done here), which can be assigned data by way of element attributes. While our top-level controllers are often responsible for interpreting URL parameters and orchestrating API calls to fetch data for their views, directive controllers are better suited for more detailed logic --- like managing the state of product option values and responding to UI click events --- which can be encapsulated and reused. And because <a href="http://stackoverflow.com/questions/22169888/angular-js-destroy-event-should-i-manually-unbind" target="_blank">Angular automatically takes care of removing our model watchers</a>, we don't even have to worry about tearing anything down when the view gets destroyed.
+            The <code>restrict</code>, <code>scope</code>, <code>replace</code>, and <code>templateUrl</code> properties should all look familiar, but in this example, we're introducing a new player: <code>controller</code>. As the name suggests, it works just like the view controllers we've seen before. The only difference is that our directive controller is given the option of inheriting its scope or creating an isolated scope (like we've done here), which can be assigned data by way of element attributes. While our top-level controllers are often responsible for interpreting URL parameters and orchestrating API calls to fetch data for their views, directive controllers are better suited for more detailed logic --- like managing the state of product option values and responding to UI click events --- which can be encapsulated and reused.
+            </p>
+
+          <p>
+            It's worth noting that in the example above, <a href="http://stackoverflow.com/questions/22169888/angular-js-destroy-event-should-i-manually-unbind" target="_blank">Angular will automatically unbind our watchers</a> when the view gets destroyed. More specifically, Angular will unbind observers assigned through <code>$scope.$watch</code> and <code>$scope.$on</code> when <code>$scope</code> is destroyed. If we create any observers outside of this scope, we'll have to listen for Angular to fire a <code>$destroy</code> event, then unsubscribe manually.
           </p>
 
           <p style="color:#999999">
