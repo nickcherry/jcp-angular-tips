@@ -165,7 +165,7 @@
           <script src="https://gist.github.com/jcpinnovation/225faad4faed76493d6c.js"></script>
 
           <p>
-            With its built-in directives, Angular can take care of our form's data-binding and even help out with validation, but we'll still need to handle the add-to-bag functionality ourselves. Notice the opening tag of our view's <code>form</code> element. It specifies a name <code>productForm</code> and submit action <code>ng-submit="addToBag(product)"</code>. Let's add a method to our scope, so we can respond to the <code>addToBag</code> call. The handler should verify that the form data is valid, then facilitate the hand-off of our product to the shopping bag. For the sake of simplicity, assume that Bag is a singleton model that exposes an <code>add</code> method for adding products.
+            With its built-in directives, Angular can take care of our form's data-binding and even help out with validation, but we'll still need to handle the add-to-bag functionality ourselves. Notice the opening tag of our view's <code>form</code> element. It specifies a name <code>productForm</code> and submit action <code>ng-submit="addToBag(product)"</code>. Let's add a method to our scope, so we can respond to the <code>addToBag</code> call. The handler should verify that the form data is valid, then facilitate the hand-off of our product to the shopping bag. For the sake of simplicity, assume that <code>BagFactory.getInstance()</code> returns a singleton Bag model that exposes an <code>add</code> method for adding products.
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/b30e395549b67227e6fb.js"></script>
@@ -199,7 +199,7 @@
               One of the most useful and powerful features of AngularJS is directives. AngularJS directives are a framework convention for creating custom extensions to HTML that can encapsulate both the view and behavior of a UI component such as a site search bar in a way that can limit external dependencies, as well as providing for very flexible configuration parameters that any application or container level code may wish to provide.
             </p>
             <p>
-              The AngularJS team state that using AngularJS is a way to overcome the primary shortcoming of HTML, mainly that it was designed for static presentation not dynamic, data driven interaction and presentation- a key feature of today's web. Because HTML has not evolved to provide dynamic presentation, JavaScript frameworks have risen to fill the gap, the most popular being jQuery.
+              The AngularJS team state that using AngularJS is a way to overcome the primary shortcoming of HTML, mainly that it was designed for static presentation not dynamic, data driven interaction and presentation - a key feature of today's web. Because HTML has not evolved to provide dynamic presentation, JavaScript frameworks have risen to fill the gap, the most popular being jQuery.
             </p>
             <p>
               jQuery gives us common boilerplate code for querying the DOM, binding and listening for user or browser events, and then imperatively updating or "re-painting" the DOM in response. This was great when web applications were simple. But web applications have grown very complex, and the boilerplate code can add up to thousands of lines of source mixed in with the actual application logic.
@@ -208,6 +208,70 @@
               AngularJS removes the boilerplate, thus allowing JavaScript developers to opportunity to concentrate solely on the business logic of the application, and in a way that hard dependencies to the DOM are removed.
             </p>
           </blockquote>
+
+          <p>
+            Now that we have a better idea of what directives are, let's try out a simple example. Consider JCPenney's product rating stars, which appear throughout the site in search results, product detail views, and recommendations. With directives, we can "componentize" that logic so that it can be shared by all the aforementioned views.
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/8313c290d64544f48508.js"></script>
+
+          <script src="https://gist.github.com/jcpinnovation/063c311fcc79ffa81717.js"></script>
+
+          <script src="https://gist.github.com/jcpinnovation/076afd725a23f1b35020.js"></script>
+
+          <p>
+            So, what's happening here? The first Gist is just a template that works like any other Angular view. The view expects its scope to have an <code>isolatedProduct</code> (bear with the name). If the product has no reviews, the view renders nothing. Otherwise, it applies a "full" class to the appropriate number of stars, then displays the number of reviews in parentheses.
+          </p>
+
+          <p>
+            The second Gist shows how we define our directive. Like many of its core modules, Angular expects our directive function to return an object. Let's look at each of the object's properties to see what's happening:
+
+            <ul>
+              <li>
+                <b>restrict</b>: This property tells Angular how an element can communicate that our directive should bind to it. Possible values are:
+                <ul>
+                  <li>'A' for attribute: <code>&lt;div product-rating&gt;&lt;/div&gt;</code></li>
+                  <li>'C' for class: <code>&lt;div class="product-rating"&gt;&lt;/div&gt;</code></li>
+                  <li>'E' for element: <code>&lt;product-rating&gt;&lt;/product-rating&gt;</code></li>
+                  <li>'M' for comment: <code>&lt;!-- product-rating --&gt;</code></li>
+                  <li> or any combination of the aforementioned characters, e.g. 'AE'</li>
+                </ul>
+                It should be noted that Angular automatically maps an elements' names/classes/attributes from "HTML/CSS-case" (i.e. all lowercase, separated by dashes) to camel-case.
+              </li>
+              <li>
+                <b>scope</b>: This property tells Angular how to manage our directive's scope. Possible values are:
+                <ul>
+                  <li><code>false</code>: no scope</li>
+                  <li><code>true</code>: a child of the parent controller's scope</li>
+                  <li><code>{}</code>: an isolated scope</li>
+                </ul>
+                In the case of the latter (which we're opting for in this example), we'll need to specify key-value pairs to configure how our directive can bind to data provided by the element. The keys determine the property name on our isolated scope, while the corresponding values tell Angular what attributes to look for on the element. Typically, we would use "product" as the name for all of these variables, but right now we're opting for more verbose names to better illustrate how binding works. <a href="http://stackoverflow.com/questions/14914213/when-writing-a-directive-how-do-i-decide-if-a-need-no-new-scope-a-new-child-sc" target="_blank">This StackOverflow post</a> and <a href="https://gist.github.com/CMCDragonkai/6282750" taret="_blank">this Gist of example use cases</a> are great resources for learning more about the nuances of directive scopes.
+              </li>
+              <li>
+                <b>replace</b>: This property tells Angular whether we want to:
+                <ul>
+                  <li>replace the original element with our template HTML (<code>true</code>)</li>
+                  <li>or embed our template's HTML within the original element (<code>false</code>)</li>
+                </ul>
+              </li>
+              <li>
+                <b>templateUrl</b>: This property tells Angular where to find the template for our element (if applicable).
+              </li>
+            </ul>
+
+          </p>
+
+          <p>
+            Last but not least is our third Gist, which shows how easily we can employ our product ratings directive anywhere in the site. Had we gone with a more natural naming scheme for our scope variables (i.e. <code>scope: { product: '=product' }</code>), the usage would be:
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/922d5f05040e7299187a.js"></script>
+
+          <p>
+            And the rendered HTML might look something like this:
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/679cc23746d02372380f.js"></script>
 
         </section>
 
