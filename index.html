@@ -274,11 +274,23 @@
           <script src="https://gist.github.com/jcpinnovation/679cc23746d02372380f.js"></script>
 
           <p>
-            And there we have it - our first Angular directive! With six lines of Coffeescript, we've gained the ability to re-use our product rating stars anywhere in the site. And every instance will rely on the same HTML partial, so we can leverage caching to cut down on our bandwidth usage (unlike less DRY approaches that nest product rating HTML into every view that requires it). 
+            And there we have it - our first Angular directive! With six lines of Coffeescript, we've gained the ability to re-use our product rating stars anywhere in the site. And every instance will rely on the same HTML partial, so we can leverage caching to cut down on our bandwidth consumption (unlike less DRY approaches that nest product rating HTML into every view that requires it). 
           </p>
 
           <p>
-            If you've used frameworks like Ruby on Rails in the past, this example probably feels familiar; it's very much like a view passing local variables to a partial. In Rails, the partial is free to use helpers or call instance methods on models, but unless you're injecting logic into places where it doesn't belong, that's the extent of a partial's functionality. Angular's directives tell a different story. By virtue of living on the client-side, Javascript is much more dynamic in nature. A front-end partial/directive can't spit out some markup, brush its hands off, and say, "I'm done!" It needs to hang on to its scope, because it may need to react to updated data or a user's input. 
+            If you've used frameworks like Ruby on Rails in the past, our example probably feels familiar; it's very much like a view passing local variables to a partial. In Rails, the partial is free to use helpers or call instance methods on models, but unless you're injecting logic into places where it doesn't belong, that's the extent of a partial's functionality. Angular's directives tell a different story. By virtue of living on the client-side, Javascript is much more dynamic in nature. A front-end partial/directive can't spit out some markup, brush its hands off, and say, "I'm done!" It needs to hang on to its scope, because it may need to react to updated data or a user's input. Fortunately, the good people at Google have given us a nice tool to help out with this sort of thing.
+          </p>
+
+          <p>
+            For our next example, we're going to create a product form... 
+          </p>
+
+          <p>
+            More stuff here...
+          </p>
+
+          <p>
+            The JCPenney site is full of opportunities to utilize directives; product results (like you would see after drilling down to a category or searching for "winter coats"), recommendations, reviews, loading indicators, and accordions are just a few candidates. And don't forget that directives can be nested within directives, so bite-sized components (like our product rating stars or a directive to display pricing information for a product) can be assembled into much more complex (but still self-contained) pieces of functionality.
           </p>
 
         </section>
