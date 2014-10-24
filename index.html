@@ -17,11 +17,11 @@
 
       <!-- ///////////////////////////////////////////////////////////////////////////// -->
 
-      <section>
+      <section id="overview-of-angular-components">
 
         <h2>Overview of Angular Components</h2>
 
-        <section>
+        <section id="models">
 
           <h3>Models</h3>
 
@@ -47,7 +47,7 @@
 
         </section>
 
-        <section>
+        <section id="factories">
 
           <h3>Factories</h3>
           
@@ -107,7 +107,7 @@
 
           <script src="https://gist.github.com/jcpinnovation/1c95ed19a8370c59c79f.js"></script>
 
-          <p>
+          <p id="beauty-of-resources">
             And lastly, before moving onto the next section, let's take a moment to acknowledge one of the <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> module's most beautiful features. From Angular's documentation: 
           </p>
 
@@ -123,7 +123,7 @@
 
         </section>
 
-        <section>
+        <section id="controllers">
 
           <h3>Controllers</h3>
 
@@ -146,7 +146,7 @@
           <script src="https://gist.github.com/jcpinnovation/d45b5fa770340da9c29a.js"></script>
 
           <p>
-            If you remember from the Factories section, <a href="https://docs.angularjs.org/api/ngResource/service/$resource" target="_blank">$resource</a> actions immediately return an empty reference, then populate the object/array with data when the response arrives. This means that we don't have to setup any callbacks in our controller. The above code is all we need to give our view access to its models. 
+            If you remember <a href="#beauty-of-resources">from the Factories section</a>, $resource actions immediately return an empty reference, then populate the object/array with data when the response arrives. This means that we don't have to setup any callbacks in our controller. The above code is all we need to give our view access to its models. 
           </p>
 
           <p>
@@ -158,7 +158,9 @@
               <li>recommendations for the given product</li>
             </ol>
 
-            Don't worry if the lack of modularity grosses you out; we'll get to that in the Directives section. <img class="emoji" alt=":)" src="img/wink.png">
+            <span id="directives-foreshadowing">
+              Don't worry if the lack of modularity grosses you out; we'll get to that in the Directives section. <img class="emoji" alt=":)" src="img/wink.png">
+            </span>
 
           </p>
 
@@ -176,12 +178,12 @@
 
         </section>
 
-        <section>
+        <section id="directives">
 
           <h3>Directives</h3>
           
           <p>
-            We've alluded to directives a few times up to this point. You might be wondering, "What exactly <i>are</i> these mysterious entities?" The <a href="https://docs.angularjs.org/guide/directive" target="_blank">official AngularJS documentation</a> is a bit technical, but hopefully begins to paint the picture:
+            We've alluded to directives a few times up to this point. You might be wondering, "What exactly <i>are</i> these mysterious entities?" The <a href="https://docs.angularjs.org/guide/directive" target="_blank">official AngularJS documentation</a> is a bit technical, but hopefully it begins to paint the picture:
           </p>
 
           <blockquote>
@@ -191,7 +193,7 @@
           </blockquote>
 
           <p>
-            One very important feature that the above definition fails to acknolwedge is that directives can manage their own scopes, as well as inherit those of their parent controllers. This means directives can function as "mini-controllers" of sorts, enabling us to better encapsulate and re-use components. The following excerpt from <a href="https://leanpub.com/web-component-development-with-angularjs/read" target="_blank">Web Component Architecture &amp; Development with AngularJS</a> elaborates on this idea:
+            One very important feature that the above definition fails to acknolwedge is that directives can manage their own scopes, as well as inherit those of their parent controllers. This means directives can function as "mini-controllers" of sorts, enabling us to better encapsulate and re-use components. The following excerpt from <a href="https://leanpub.com/web-component-development-with-angularjs/read" target="_blank">Web Component Architecture &amp; Development with AngularJS</a> elaborates on this concept:
           </p>
 
           <blockquote>
@@ -210,7 +212,7 @@
           </blockquote>
 
           <p>
-            Now that we have a better idea of what directives are, let's try out a simple example. Consider JCPenney's product rating stars, which appear throughout the site in search results, product detail views, and recommendations. With directives, we can "componentize" that logic so that it can be shared by all the aforementioned views.
+            Now that we have a better idea of what directives are, let's try out a simple example. Consider JCPenney's product rating stars, which appear throughout the site in search results, product detail views, and recommendations. With directives, we can "componentize" this logic so it can be shared by all the aforementioned views.
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/8313c290d64544f48508.js"></script>
@@ -220,11 +222,11 @@
           <script src="https://gist.github.com/jcpinnovation/076afd725a23f1b35020.js"></script>
 
           <p>
-            So, what's happening here? The first Gist is just a template that works like any other Angular view. The view expects its scope to have an <code>isolatedProduct</code> (bear with the name for a moment). If the product has no reviews, the view renders nothing. Otherwise, it applies a "full" class to the appropriate number of stars, then displays the number of reviews in parentheses.
+            So, what's happening here? The first Gist is just a template that works like any other Angular view. The view expects its scope to have an <code>isolatedProduct</code> (bear with the name for a moment). If the product has no reviews, the view renders nothing. Otherwise, it applies a "full" class to the appropriate number of star elements, then displays the number of reviews in parentheses.
           </p>
 
           <p>
-            The second Gist shows how we define our directive. Like many of its core modules, Angular expects our directive function to return an object. Let's look at some of its properties to see what's happening:
+            The second Gist shows how we define our directive. Like many of its core modules, Angular expects our directive function to return an object. Let's look at some of its available properties to see what's happening:
 
             <ul>
               <li>
@@ -236,7 +238,7 @@
                   <li>'M' for comment: <code>&lt;!-- product-rating --&gt;</code></li>
                   <li> we can also use any combination of the aforementioned characters, e.g. 'AE'</li>
                 </ul>
-                It should be noted that Angular automatically maps an elements' names/classes/attributes from "HTML/CSS-case" (i.e. all lowercase, separated by dashes) to camel-case.
+                It should be noted that Angular automatically maps elements' names/classes/attributes from "HTML/CSS-case" (i.e. all lowercase, separated by dashes) to camel-case.
               </li>
               <li>
                 <b>scope</b>: This property tells Angular how to manage our directive's scope. Possible values are:
@@ -262,7 +264,7 @@
           </p>
 
           <p>
-            Last but not least is our third Gist, which shows how easily we can employ our product ratings directive anywhere in the site. Had we gone with a more natural naming scheme for our scope variables (i.e. <code>scope: { product: '=product' }</code>), the usage would be:
+            Last but not least is our third Gist, which shows how easily we can employ our product ratings directive anywhere in the site. Had we gone with a more natural naming scheme for our scope variables (i.e. <code>scope: { product: '=product' }</code>), the usage would instead be:
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/922d5f05040e7299187a.js"></script>
@@ -274,16 +276,20 @@
           <script src="https://gist.github.com/jcpinnovation/679cc23746d02372380f.js"></script>
 
           <p>
-            And there we have it - our first Angular directive! With six lines of Coffeescript, we've gained the ability to re-use our product rating stars anywhere in the site. And every instance will rely on the same HTML partial, so we can leverage caching to cut down on our bandwidth consumption (unlike less DRY approaches that nest product rating HTML into every view that requires it). 
+            And there we have it - our first Angular directive! With six lines of Coffeescript, we've gained the ability to re-use our product rating stars anywhere in the site. And every instance will rely on the same HTML partial, so we can leverage caching to cut down on our bandwidth consumption (unlike less DRY approaches, which might nest product rating HTML into every view that requires it). 
           </p>
 
           <p>
-            If you've used frameworks like Ruby on Rails in the past, our example probably feels familiar; it's very much like a view passing local variables to a partial. In Rails, the partial is free to use helpers or call instance methods on models, but unless you're injecting logic into places where it doesn't belong, that's the extent of a partial's functionality. Angular's directives tell a different story. By virtue of living on the client-side, Javascript is much more dynamic in nature. A front-end partial/directive can't spit out some markup, brush its hands off, and say, "I'm done!" It needs to hang on to its scope, and it may need to react to updated data or a user's input. Fortunately, the good people at Google have given us a nice tool to help out with this sort of thing.
+            If you've used frameworks like Ruby on Rails in the past, our example probably feels familiar; it's very much like a view passing local variables to a partial. In Rails, the partial is free to use helpers or call instance methods on models, but unless you're injecting logic into places where it doesn't belong, that's the extent of the partial's functionality. For server-side rendering, this is great. But on the client-side, views are much more dynamic in nature. A front-end partial/directive can't spit out some markup, brush its hands off, and say, "I'm done!" It needs to hang on to its scope and possibly react to updated data or user input. Fortunately, Angular gives us some convenient tools for handling this sort of thing.
           </p>
 
           <p>
-            For our next example, we're going to create a product form... 
+            Remember <a href="#directives-foreshadowing">back in the Controllers section</a>, when we alluded to the fact that directives would one day help to make our product detail page a little more modular? Well, the day has come. In our next example, we're going to extract the product form functionality to its own directive. As you'll see in the code below, the template markup looks exactly the same as before, besides now living in its own file. You'll also recognize the <code>addToBag</code> handler, which was formerly defined in our ProductController. And to make things more interesting, we're going to introduce new logic to disable out-of-stock option values based on the user's selection. To accomplish this, we'll bind to <code>availability</code>, which we can assume to be a <a href="http://simple.wikipedia.org/wiki/Cartesian_product" target="_blank">Cartesian product</a> indicating the availability for every possible combination of product option values. You can check out an example response <a href="http://jcp-orchestration.herokuapp.com/products/pp5003721248/availability" target="_blank">here</a>.
           </p>
+
+          <script src="https://gist.github.com/jcpinnovation/1ffb7b9f1a9dad221dfc.js"></script>
+
+          <script src="https://gist.github.com/jcpinnovation/7e6da31bf09c3d73dc79.js"></script>
 
           <p>
             More stuff here...
@@ -299,7 +305,7 @@
 
       <!-- ///////////////////////////////////////////////////////////////////////////// -->
 
-      <section>
+      <section id="app-structure">
 
         <h2>App Structure</h2>
 
@@ -309,7 +315,7 @@
 
       <!-- ///////////////////////////////////////////////////////////////////////////// -->
 
-      <section>
+      <section id="task-runners">
 
         <h2>Task Runners</h2>
         <p>Coming soon!</p>
