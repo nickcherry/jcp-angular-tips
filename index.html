@@ -220,21 +220,21 @@
           <script src="https://gist.github.com/jcpinnovation/076afd725a23f1b35020.js"></script>
 
           <p>
-            So, what's happening here? The first Gist is just a template that works like any other Angular view. The view expects its scope to have an <code>isolatedProduct</code> (bear with the name). If the product has no reviews, the view renders nothing. Otherwise, it applies a "full" class to the appropriate number of stars, then displays the number of reviews in parentheses.
+            So, what's happening here? The first Gist is just a template that works like any other Angular view. The view expects its scope to have an <code>isolatedProduct</code> (bear with the name for a moment). If the product has no reviews, the view renders nothing. Otherwise, it applies a "full" class to the appropriate number of stars, then displays the number of reviews in parentheses.
           </p>
 
           <p>
-            The second Gist shows how we define our directive. Like many of its core modules, Angular expects our directive function to return an object. Let's look at each of the object's properties to see what's happening:
+            The second Gist shows how we define our directive. Like many of its core modules, Angular expects our directive function to return an object. Let's look at some of its properties to see what's happening:
 
             <ul>
               <li>
-                <b>restrict</b>: This property tells Angular how an element can communicate that our directive should bind to it. Possible values are:
+                <b>restrict</b>: This property tells Angular how an element can communicate that it wants to use our directive. Possible values are:
                 <ul>
                   <li>'A' for attribute: <code>&lt;div product-rating&gt;&lt;/div&gt;</code></li>
                   <li>'C' for class: <code>&lt;div class="product-rating"&gt;&lt;/div&gt;</code></li>
                   <li>'E' for element: <code>&lt;product-rating&gt;&lt;/product-rating&gt;</code></li>
                   <li>'M' for comment: <code>&lt;!-- product-rating --&gt;</code></li>
-                  <li> or any combination of the aforementioned characters, e.g. 'AE'</li>
+                  <li> we can also use any combination of the aforementioned characters, e.g. 'AE'</li>
                 </ul>
                 It should be noted that Angular automatically maps an elements' names/classes/attributes from "HTML/CSS-case" (i.e. all lowercase, separated by dashes) to camel-case.
               </li>
@@ -272,6 +272,14 @@
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/679cc23746d02372380f.js"></script>
+
+          <p>
+            And there we have it - our first Angular directive! With six lines of Coffeescript, we've gained the ability to re-use our product rating stars anywhere in the site. And every instance will rely on the same HTML partial, so we can leverage caching to cut down on our bandwidth usage (unlike less DRY approaches that nest product rating HTML into every view that requires it). 
+          </p>
+
+          <p>
+            If you've used frameworks like Ruby on Rails in the past, this example probably feels familiar; it's very much like a view passing local variables to a partial. In Rails, the partial is free to use helpers or call instance methods on models, but unless you're injecting logic into places where it doesn't belong, that's the extent of a partial's functionality. Angular's directives tell a different story. By virtue of living on the client-side, Javascript is much more dynamic in nature. A front-end partial/directive can't spit out some markup, brush its hands off, and say, "I'm done!" It needs to hang on to its scope, because it may need to react to updated data or a user's input. 
+          </p>
 
         </section>
 
