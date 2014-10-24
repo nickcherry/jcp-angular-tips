@@ -193,7 +193,7 @@
           </blockquote>
 
           <p>
-            One very important feature that the above definition fails to acknolwedge is that directives can manage their own scopes, as well as inherit those of their parent controllers. This means directives can function as "mini-controllers" of sorts, enabling us to better encapsulate and re-use components. The following excerpt from <a href="https://leanpub.com/web-component-development-with-angularjs/read" target="_blank">Web Component Architecture &amp; Development with AngularJS</a> elaborates on this concept:
+            One very important feature that the above definition fails to acknolwedge is that directives can manage their own scopes, as well as inherit those of their parent controllers. This means directives can function as "mini-controllers" or "nested controllers", enabling us to better encapsulate and re-use components. The following excerpt from <a href="https://leanpub.com/web-component-development-with-angularjs/read" target="_blank">Web Component Architecture &amp; Development with AngularJS</a> elaborates on this concept:
           </p>
 
           <blockquote>
@@ -284,7 +284,7 @@
           </p>
 
           <p>
-            Remember <a href="#directives-foreshadowing">back in the Controllers section</a>, when we alluded to the fact that directives would one day help to make our product detail page a little more modular? Well, the day has come. In our next example, we're going to extract the product form functionality to its own directive. As you'll see in the code below, the template markup looks exactly the same as before, besides now living in its own file. You'll also recognize the <code>addToBag</code> handler, which was formerly defined in our ProductController. And to make things more interesting, we're going to introduce new logic to disable out-of-stock option values based on the user's selection. To accomplish this, we'll bind to <code>availability</code>, which we can assume to be a <a href="http://simple.wikipedia.org/wiki/Cartesian_product" target="_blank">Cartesian product</a> indicating the availability for every possible combination of product option values. You can check out an example response <a href="http://jcp-orchestration.herokuapp.com/products/pp5003721248/availability" target="_blank">here</a>.
+            Remember <a href="#directives-foreshadowing">back in the Controllers section</a>, when we alluded to the fact that directives would one day help to make our product detail page a little more modular? Well, the day has come. In our next example, we're going to extract the product form functionality to its own directive. As you'll see in the code below, the template markup looks exactly the same as before, besides now living in its own file. You'll also recognize the <code>addToBag</code> handler, which was formerly defined in our ProductController. And to make things more interesting, we're going to introduce new logic to disable out-of-stock option values based on the user's selection. To accomplish this, we'll bind to <code>availability</code>, which we can assume to be a <a href="http://simple.wikipedia.org/wiki/Cartesian_product" target="_blank">Cartesian product</a> indicating the availability for every possible combination of product option values. You can check out an example product-availability response <a href="http://jcp-orchestration.herokuapp.com/products/pp5003721248/availability" target="_blank">here</a>. And now, without further ado, the productForm directive:
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/1ffb7b9f1a9dad221dfc.js"></script>
@@ -292,11 +292,15 @@
           <script src="https://gist.github.com/jcpinnovation/7e6da31bf09c3d73dc79.js"></script>
 
           <p>
-            More stuff here...
+            The <code>restrict</code>, <code>scope</code>, <code>replace</code>, and <code>templateUrl</code> properties should all look familiar, but in this example, we're introducing a new player: <code>controller</code>. As the name suggests, it works just like the view controllers we've seen before! The only difference is that our directive controller is given the option of inheriting its scope or creating an isolated scope (like we've done here), which can be assigned data by way of element attributes. While our top-level controllers are often responsible for interpreting URL parameters and orchestrating API calls to fetch data for their views, directive controllers are better suited for more detailed logic --- like managing the state of product option values and responding to UI click events --- which can be encapsulated and reused. And because <a href="http://stackoverflow.com/questions/22169888/angular-js-destroy-event-should-i-manually-unbind" target="_blank">Angular automatically takes care of removing our model watchers</a>, we don't even have to worry about tearing anything down when the view gets destroyed.
+          </p>
+
+          <p style="color:#999999">
+            <i>TODO: Directive Example That Utilizes Link</i>
           </p>
 
           <p>
-            The JCPenney site is full of opportunities to utilize directives; product results (like you would see after drilling down to a category or searching for "winter coats"), recommendations, reviews, loading indicators, and accordions are just a few candidates. And don't forget that directives can be nested within directives, so bite-sized components (like our product rating stars or a directive to display pricing information for a product) can be assembled into much more complex (but still self-contained) pieces of functionality.
+            The JCPenney site is full of opportunities to utilize directives; product results (like you would see after drilling down to a category or searching for "winter coats"), recommendations, reviews, loading indicators, and accordions are just a few candidates that immediately come to mind. And don't forget that directives can be nested within other directives, so bite-sized components (like our product rating stars or a directive to display pricing information for a product) can be assembled into much more complex (but still self-contained) pieces of functionality.
           </p>
 
         </section>
