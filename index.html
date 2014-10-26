@@ -30,7 +30,7 @@
           </p>
 
           <p>
-            Take a look at the example <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/product.coffee" target="_blank">Product</a> model below, which inherits from a bare-bones <a href="https://github.com/jcpenney/jcp-responsive-v2/blob/master/src/coffee/models/base.coffee" target="_blank">ModelBase</a>.
+            Take a look at the example Product model below, which inherits from a bare-bones <a href="https://gist.github.com/jcpinnovation/9d2d8cdd5283062b3179" target="_blank">ModelBase</a>.
           </p>
 
           <script src="https://gist.github.com/jcpinnovation/2cc6b5d786a30f80f12d.js"></script>
@@ -294,7 +294,7 @@
           <script src="https://gist.github.com/jcpinnovation/b8745980268802f3fbdc.js"></script>
 
           <p>
-            The <code>restrict</code>, <code>scope</code>, <code>replace</code>, and <code>templateUrl</code> properties should all look familiar, but in this example, we're introducing a new player: <code>controller</code>. As the name suggests, it works just like the view controllers we've seen before. The only difference is that our directive controller is given the option of inheriting its scope or creating an isolated scope (like we've done here), which can be assigned data by way of element attributes. While our top-level controllers are often responsible for interpreting URL parameters and orchestrating API calls to fetch data for their views, directive controllers are better suited for more detailed logic --- like managing the state of product option values and responding to UI click events --- which can be encapsulated and reused.
+            The <code>restrict</code>, <code>scope</code>, <code>replace</code>, and <code>templateUrl</code> properties should all look familiar, but in this example, we're introducing a new player: <code>controller</code>. As the name suggests, it works just like the view controllers we've seen before. The only difference is that our directive controller is given the option of inheriting its scope or creating an isolated scope (like we've done here), which can be assigned data by way of element attributes. While our top-level controllers are often responsible for interpreting URL parameters and orchestrating API calls to fetch data for their views, directive controllers are better suited for more fine-grain logic --- like managing the state of product option values and responding to UI click events --- which can be encapsulated and reused.
             </p>
 
           <p>
