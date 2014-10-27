@@ -301,9 +301,31 @@
             It's worth noting that in the example above, <a href="http://stackoverflow.com/questions/22169888/angular-js-destroy-event-should-i-manually-unbind" target="_blank">Angular will automatically unbind our watchers</a> when the view gets destroyed. More specifically, Angular will unbind observers assigned through <code>$scope.$watch</code> and <code>$scope.$on</code> when <code>$scope</code> is destroyed. If we create any observers outside of this scope, we'll have to listen for Angular to fire a <code>$destroy</code> event, then unsubscribe manually.
           </p>
 
-          <p style="color:#999999">
-            <i>TODO: Directive Example That Utilizes Link</i>
+          <p>
+            With data-centric directives, we often won't need to add our own listeners to DOM elements; Angular's built-in directives (e.g. <a href="https://docs.angularjs.org/api/ng/directive/ngChange" target="_blank">ng-change</a>, <a href="https://docs.angularjs.org/api/ng/directive/ngSubmit" taret="_blank">ng-submit</a>, <a href="https://docs.angularjs.org/api/ng/directive/ngClick" target="_blank">ng-click</a>, <a href="https://docs.angularjs.org/api/ng/directive/ngMouseover" target="_blank">ng-mouseover</a>, <a href="https://docs.angularjs.org/api/ng/directive/ngClass" target="_blank">ng-class</a> etc.) will go a long way. In fact, if you ever find yourself tempted to modify the DOM directly, you should take a moment to consider whether there's a cleaner, more Angular-minded approach to solving the problem. In some scenarios --- like when we're interested solely in UI behavior, not any underlying models --- it may be appropriate to utilize jQuery <b><u>in small doses</u></b>. Note the emphasis on moderation here. For these situations, it's best to utilize the <code>link</code> function, which <a href="http://www.sitepoint.com/practical-guide-angularjs-directives/" target="_blank">A Practical Guide to AngularJS Directives</a> describes as being "mainly used for attaching event listeners to DOM elements, watching model properties for changes, and updating the DOM."
           </p>
+
+          <p>
+            In our next example, we're going to build a simple accordion directive. Unlike our previous directives, which specify "E" (element) as a <code>restrict</code> value, this time we'll use "C" (class) to trigger our directive. We'll omit the <code>scope</code> property, because our directive doesn't need to worry about data. Similarly, we can leave out <code>replace</code> and <code>templateUrl</code>, as we won't have to inject any templates. By default, our directive will expect the accordion element to contain a <code>&lt;section&gt;</code> for each of its logical groups. Each <code>&lt;section&gt;</code> should then include the following:
+
+            <ul>
+              <li>
+                one immediate child with "heading" class; this element will expand/collapse its parent <code>&lt;section&gt;</code> on click.
+              </li>
+              <li>
+                one immediate child with a "content" class, after the aforementioned "heading"; this element will contain the content that becomes visible when its parent <code>&lt;section&gt;</code> is expanded.
+              </li>
+            </ul>
+
+             When a <code>&lt;section&gt;</code> is expanded, it will be assigned an "expanded" class. Without any styling, our accordion directive won't appear to do much of anything, but it provides all the meta data we need to create the desired visual behavior with SCSS. By implementing the accordion in an unobtrusive, class-oriented manner, we keep design out of our Javascript, while giving our markup freedom to do whatever it wants (so long as a few basic requirements are met). The default section selector, heading selector, and expanded class can be overwritten via <code>section-selector</code>, <code>heading-selector</code>, and <code>expanded-class</code> attributes to the accordion element. 
+
+          </p>
+
+          <script src="https://gist.github.com/jcpinnovation/54b505ef47869f5a76a1.js"></script>
+
+          <script src="https://gist.github.com/jcpinnovation/deff645ca6301ea46900.js"></script>
+
+          <script src="https://gist.github.com/jcpinnovation/d0a43aef88b8be18cb1b.js"></script>
 
           <p>
             The JCPenney site is full of opportunities to utilize directives; product results (like you would see after drilling down to a category or searching for "winter coats"), recommendations, reviews, loading indicators, and accordions are just a few candidates that immediately come to mind. And don't forget that directives can be nested within other directives, so bite-sized components (like our product rating stars or a directive to display pricing information for a product) can be assembled into much more complex (but still self-contained) pieces of functionality.
