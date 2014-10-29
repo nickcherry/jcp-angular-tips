@@ -139,6 +139,7 @@ code {
 .file-tree ul li {
   color: #333333;
   margin-bottom: 0;
+  overflow: auto;
 }
 .file-tree .dir:before, .file-tree .file:before {
   background-size: 12px 12px;
