@@ -356,7 +356,7 @@
         <h2>App Structure and Naming Conventions</h2>
 
         <p>
-          We've talked a lot about how to use Angular components, but haven't given much attention to where we should put them. Our application structure, which is inspired by that of a typical Rails app, will include a directory for each type of Angular object. That is to say, controllers, factories, filters, models, and services will all have their own folders. View templates and SCSS files will also have their own directories, inside each of which we'll add "pages" and "components" subdirectories, for more granular organization that corresponds to controllers and directives. To better visualize the described pattern, take a look at the skeleton structure below.
+          We've talked a lot about how to use Angular components, but up until this point, we haven't given much attention to where we should put them. Our application structure, which is inspired by that of a typical Rails app, will include a directory for each type of Angular object. That is to say, controllers, factories, filters, models, and services will all have their own folders. View templates and SCSS files will also have their own directories, inside each of which we'll add <code>pages</code> and <code>components</code> subdirectories, for more granular organization that corresponds to controllers and directives. To better visualize the described pattern, take a look at the skeleton structure below.
         </p>
 
         <div class="file-tree">
@@ -385,6 +385,7 @@
                   <ul>
                     <li class="dir">components</li>
                     <li class="dir">pages</li>
+                    <li class="dir">theme</li>
                     <li class="file">application.scss</li>
                   </ul>
                 </li>
@@ -395,14 +396,14 @@
                     <li class="dir">pages</li>
                   </ul>
                 </li>
+                <li class="file">index.html</li>
               </ul>
-              <li class="file">index.html</li>
             </li>
           </ul>
         </div>
 
         <p>
-          Now that we have a better sense of the structure, let's revisit the tree, only this time with more files added. Note that we're using <a href="http://en.wikipedia.org/wiki/Snake_case" target="_blank">snake case</a> for all of our filenames. As a rule of thumb, a file's name should reflect that of the one (and only) component it defines. For example, our ProductController lives in <code>product_controller.coffee</code>, our Department model lives in <code>department.coffee</code>, and our productForm directive lives in <code>product_form.coffee</code>. View template names should correspond to their respective controllers or directives; controller views go in <code>views/pages</code>, while directive views go in <code>views/components</code>. Similarly, SCSS file organization should reflect that of our views.
+          Now that we have a better sense of the hierarchy, let's revisit the tree, only this time with more files added. Note that we're using <a href="http://en.wikipedia.org/wiki/Snake_case" target="_blank">snake case</a> for all of our filenames. As a rule of thumb, a file's name should reflect that of the one (and only) component it defines. For example, our ProductController lives in <code>product_controller.coffee</code>, our Department model lives in <code>department.coffee</code>, and our productForm directive lives in <code>product_form.coffee</code>. View template names should correspond to their respective controllers or directives; controller views go in <code>views/pages</code>, while directive views go in <code>views/components</code>. Similarly, SCSS file organization should reflect that of our views.
         </p>
 
         <div class="file-tree">
@@ -520,7 +521,7 @@
                       </ul>
                     </li>
                     <li>
-                      <span class="dir open">app</span>
+                      <span class="dir open">theme</span>
                       <ul>
                         <li class="file">_buttons.scss</li>
                         <li class="file">_headings.scss</li>
@@ -569,8 +570,8 @@
                     </li>
                   </ul>
                 </li>
+                <li class="file">index.html</li>
               </ul>
-              <li class="file">index.html</li>
             </li>
           </ul>
         </div>
@@ -586,12 +587,12 @@
         
         <h4>New developers can make sense of the code base without being intimately familiar with JCPenney's site.</h4>
         <p>
-          In the previous paragraph, we demonstrated how it's possible to anticipate exactly where to find component definitions, view templates, and SCSS files with very little knowledge of the application itself. With the structure we've adopted, Angular developers can feasibly orient themselves to a project in under a day's time. This may not be feasible for an application whose skeleton is based around logic tied to a specific site/business.
+          In the previous paragraph, we demonstrated how it's possible to anticipate exactly where to find component definitions, view templates, and SCSS files with very little knowledge of the application itself. With the structure we've adopted, Angular developers can feasibly orient themselves to a project in under a day's time. This may not be possible for an application whose skeleton is based around logic tied to a specific site/business.
         </p>
 
         <h4>Code re-use is encouraged.</h4>
         <p>
-          When the time comes to build out a new feature, our structure makes it comparatively easy to check whether the required functionality has already been implemented elsewhere. Let's pretend we're developing a new component that shows the nearby in-store availability for products on a customer's wish list. One of the prerequisites is going to be figuring out which stores are close to the current user's location; that's probably going to involve querying the API's <code>/stores</code> endpoint with a latitude and longitude. Before diving in and writing custom code to fetch this data, we can do a quick scan of the <code>coffee/factories</code> directory (where most/all of our API calls are made) to verify that another developer hasn't coded something similar. In doing so, we would learn that StoreFactory already provides the exact functionality we're looking for. (It was originally implemented for the Store Locator page of the site.) Had our application's skeleton been structured around components, we may not have any idea where to look for pre-existing logic. We may have gotten lucky and noticed that "store" was in the component's name, but then where would we move the factory logic in order to share it across multiple components?
+          When the time comes to build out a new feature, our structure makes it comparatively easy to check whether the required functionality has already been implemented elsewhere. Let's pretend we're developing a new component that shows the nearby in-store availability for products on a customer's wish list. One of the prerequisites is going to be figuring out which stores are close to the current user's location; that's probably going to involve querying the API's <code>/stores</code> endpoint with a latitude and longitude. Before diving in and writing custom code to fetch this data, we can do a quick scan of the <code>coffee/factories</code> directory (where most/all of our API calls are made) to verify that another developer hasn't coded something similar. In doing so, we would learn that StoreFactory already provides the exact functionality we're looking for. (It was originally implemented for the Store Locator page of the site.) Had our application's skeleton been structured around components, we might not have any idea where to look for pre-existing logic. We may have gotten lucky and noticed that "store" was in the component's name, but then where would we move the factory logic in order to share it across multiple components?
         </p>
 
         <h4>Consistent code style is encouraged.</h4>
