@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>Angular Tips for JCPenney.com</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/styleguide.css" />
   </head>
   
@@ -339,15 +339,271 @@
 
         </section>
 
+        <section id="filters">
+
+            <h3>Filters</h3>
+
+            <p>Coming soon!</p>
+
+        </section>
+
       </section>
 
       <!-- ///////////////////////////////////////////////////////////////////////////// -->
 
       <section id="app-structure">
 
-        <h2>App Structure</h2>
+        <h2>App Structure and Naming Conventions</h2>
 
-        <p>Coming soon!</p>
+        <p>
+          We've talked a lot about how to use Angular components, but haven't given much attention to where we should put them. Our application structure, which is inspired by that of a typical Rails app, will include a directory for each type of Angular object. That is to say, controllers, factories, filters, models, and services will all have their own folders. View templates and SCSS files will also have their own directories, inside each of which we'll add "pages" and "components" subdirectories, for more granular organization that corresponds to controllers and directives. To better visualize the described pattern, take a look at the skeleton structure below.
+        </p>
+
+        <div class="file-tree">
+          <ul>
+            <li>
+              <span class="dir open">src</span>
+              <ul>
+                <li>
+                  <span class="dir open">coffee</span>
+                  <ul>
+                    <li class="dir">controllers</li>
+                    <li class="dir">directives</li>
+                    <li class="dir">factories</li>
+                    <li class="dir">filters</li>
+                    <li class="dir">models</li>
+                    <li class="dir">services</li>
+                    <li class="file">app.coffee</li>
+                    <li class="file">config.coffee</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="dir open">img</span>
+                </li>
+                <li>
+                  <span class="dir open">scss</span>
+                  <ul>
+                    <li class="dir">components</li>
+                    <li class="dir">pages</li>
+                    <li class="file">application.scss</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="dir open">views</span>
+                  <ul>
+                    <li class="dir">components</li>
+                    <li class="dir">pages</li>
+                  </ul>
+                </li>
+              </ul>
+              <li class="file">index.html</li>
+            </li>
+          </ul>
+        </div>
+
+        <p>
+          Now that we have a better sense of the structure, let's revisit the tree, only this time with more files added. Note that we're using <a href="http://en.wikipedia.org/wiki/Snake_case" target="_blank">snake case</a> for all of our filenames. As a rule of thumb, a file's name should reflect that of the one (and only) component it defines. For example, our ProductController lives in <code>product_controller.coffee</code>, our Department model lives in <code>department.coffee</code>, and our productForm directive lives in <code>product_form.coffee</code>. View template names should correspond to their respective controllers or directives; controller views go in <code>views/pages</code>, while directive views go in <code>views/components</code>. Similarly, SCSS file organization should reflect that of our views.
+        </p>
+
+        <div class="file-tree">
+          <ul>
+            <li>
+              <span class="dir open">src</span>
+              <ul>
+                <li>
+                  <span class="dir open">coffee</span>
+                  <ul>
+                    <li>
+                      <span class="dir open">controllers</span>
+                      <ul>
+                        <li class="file">account_controller.coffee</li>
+                        <li class="file">category_controller.coffee</li>
+                        <li class="file">checkout_controller.coffee</li>
+                        <li class="file">departments_controller.coffee</li>
+                        <li class="file">home_controller.coffee</li>
+                        <li class="file">product_controller.coffee</li>
+                        <li class="file">registry_controller.coffee</li>
+                        <li class="file">search_controller.coffee</li>
+                        <li class="file">store_locator_controller.coffee</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="dir open">directives</span>
+                      <ul>
+                        <li class="file">accordion.coffee</li>
+                        <li class="file">bag.coffee</li>
+                        <li class="file">footer.coffee</li>
+                        <li class="file">header.coffee</li>
+                        <li class="file">loader.coffee</li>
+                        <li class="file">modal.coffee</li>
+                        <li class="file">product_form.coffee</li>
+                        <li class="file">product_rating.coffee</li>
+                        <li class="file">product_result.coffee</li>
+                        <li class="file">recommendation.coffee</li>
+                        <li class="file">review.coffee</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="dir open">factories</span>
+                      <ul>
+                        <li class="file">category_factory.coffee</li>
+                        <li class="file">customer_factory.coffee</li>
+                        <li class="file">department_factory.coffee</li>
+                        <li class="file">product_factory.coffee</li>
+                        <li class="file">store_factory.coffee</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="dir open">filters</span>
+                      <ul>
+                        <li class="file">product_price.coffee</li>
+                        <li class="file">vdata_option_value_name.coffee</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="dir open">models</span>
+                      <ul>
+                        <li class="file">category.coffee</li>
+                        <li class="file">customer.coffee</li>
+                        <li class="file">department.coffee</li>
+                        <li class="file">product.coffee</li>
+                        <li class="file">recommendation.coffee</li>
+                        <li class="file">review.coffee</li>
+                        <li class="file">store.coffee</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="dir open">services</span>
+                      <ul>
+                        <li class="file">interceptor.coffee</li>
+                        <li class="file">shared_data.coffee</li>
+                      </ul>
+                    </li>
+                    <li class="file">app.coffee</li>
+                    <li class="file">config.coffee</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="dir open">img</span>
+                </li>
+                <li>
+                  <span class="dir open">scss</span>
+                  <ul>
+                    <li>
+                      <span class="dir open">components</span>
+                      <ul>
+                        <li class="file">_accordion.scss</li>
+                        <li class="file">_bag.scss</li>
+                        <li class="file">_footer.scss</li>
+                        <li class="file">_header.scss</li>
+                        <li class="file">_loader.scss</li>
+                        <li class="file">_modal.scss</li>
+                        <li class="file">_product_form.scss</li>
+                        <li class="file">_product_rating.scss</li>
+                        <li class="file">_product_result.scss</li>
+                        <li class="file">_recommendation.scss</li>
+                        <li class="file">_review.scss</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="dir open">pages</span>
+                      <ul>
+                        <li class="file">_account.scss</li>
+                        <li class="file">_category.scss</li>
+                        <li class="file">_checkout.scss</li>
+                        <li class="file">_departments.scss</li>
+                        <li class="file">_home.scss</li>
+                        <li class="file">_product.scss</li>
+                        <li class="file">_registry.scss</li>
+                        <li class="file">_search.scss</li>
+                        <li class="file">_store_locator.scss</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="dir open">app</span>
+                      <ul>
+                        <li class="file">_buttons.scss</li>
+                        <li class="file">_headings.scss</li>
+                        <li class="file">_inputs.scss</li>
+                        <li class="file">_layout.scss</li>
+                        <li class="file">_lists.scss</li>
+                      </ul>
+                    </li>
+                    <li class="file">_config.scss</li>
+                    <li class="file">_mixins.scss</li>
+                    <li class="file">application.scss</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="dir open">views</span>
+                  <ul>
+                    <li>
+                      <span class="dir open">components</span>
+                      <ul>
+                        <li class="file">accordion.html</li>
+                        <li class="file">bag.html</li>
+                        <li class="file">footer.html</li>
+                        <li class="file">header.html</li>
+                        <li class="file">loader.html</li>
+                        <li class="file">modal.html</li>
+                        <li class="file">product_form.html</li>
+                        <li class="file">product_rating.html</li>
+                        <li class="file">product_result.html</li>
+                        <li class="file">recommendation.html</li>
+                        <li class="file">review.html</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <span class="dir open">pages</span>
+                      <ul>
+                        <li class="file">account.html</li>
+                        <li class="file">category.html</li>
+                        <li class="file">checkout.html</li>
+                        <li class="file">departments.html</li>
+                        <li class="file">home.html</li>
+                        <li class="file">product.html</li>
+                        <li class="file">registry.html</li>
+                        <li class="file">search.html</li>
+                        <li class="file">store_locator.html</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <li class="file">index.html</li>
+            </li>
+          </ul>
+        </div>
+
+        <p>
+          Now that we're getting a sense of how we should organize our app, let's briefly talk about why. There are a few important benefits to this application structure:
+        </p>
+
+        <h4>Relevant files are easy to find.</h4>
+        <p>
+          The pages of our app can be easily identified by browsing the <code>coffee/controllers</code> directory. Let's pretend we're interested in the search page (i.e. SearchController); we immediately know that the corresponding template lives in <code>views/pages</code> and has the name <code>search.html</code>. Assuming we're taking advantage of directives, our template should be relatively minimal. Inside, we'll probably find an <code>ng-repeat</code> iterating over a <code>&lt;product-result&gt;&lt;product-result/&gt;</code>. The <code>product-result</code> element should immediately jump out as being a non-native HTML element, tipping us off that it's most likely a directive. We then know that the directive definition should live in the <code>coffee/directives</code> directory under the filename <code>product-result.coffee</code>, and its corresponding view and styling can be found in <code>views/components/product_result.html</code> and <code>scss/components/_product_result.scss</code>, respectively.
+        </p>
+        
+        <h4>New developers can make sense of the code base without being intimately familiar with JCPenney's site.</h4>
+        <p>
+          In the previous paragraph, we demonstrated how it's possible to anticipate exactly where to find component definitions, view templates, and SCSS files with very little knowledge of the application itself. With the structure we've adopted, Angular developers can feasibly orient themselves to a project in under a day's time. This may not be feasible for an application whose skeleton is based around logic tied to a specific site/business.
+        </p>
+
+        <h4>Code re-use is encouraged.</h4>
+        <p>
+          When the time comes to build out a new feature, our structure makes it comparatively easy to check whether the required functionality has already been implemented elsewhere. Let's pretend we're developing a new component that shows the nearby in-store availability for products on a customer's wish list. One of the prerequisites is going to be figuring out which stores are close to the current user's location; that's probably going to involve querying the API's <code>/stores</code> endpoint with a latitude and longitude. Before diving in and writing custom code to fetch this data, we can do a quick scan of the <code>coffee/factories</code> directory (where most/all of our API calls are made) to verify that another developer hasn't coded something similar. In doing so, we would learn that StoreFactory already provides the exact functionality we're looking for. (It was originally implemented for the Store Locator page of the site.) Had our application's skeleton been structured around components, we may not have any idea where to look for pre-existing logic. We may have gotten lucky and noticed that "store" was in the component's name, but then where would we move the factory logic in order to share it across multiple components?
+        </p>
+
+        <h4>Consistent code style is encouraged.</h4>
+        <p>
+          Another virtue of our each-type-has-its-own-directory structure is that code lives next to code that behaves similarly. This makes it easy to refer to and mimic the conventions of sibling components. For example, if we were implementing the <a href="https://gist.github.com/jcpinnovation/b55becd4fe2b5808b53f" target="_blank">DepartmentFactory</a>, we could inspect the already-existing <a href="https://gist.github.com/jcpinnovation/eb9cdd80eab15a053aa3" target="_blank">ProductFactory</a> and may learn that we should probably be extending <a href="https://gist.github.com/jcpinnovation/407c02bceb6c18c027cf" target="_blank">FactoryBase</a> and making use of its <code>generateResourceForModel</code> method, if we didn't already know that.
+        </p>
+
+        <h4>Files can be grouped into sub-directories if necessary.</h4>
+
+        <p>
+          Our code base will inevitably grow, and at some point, our folders might become too populated for our liking. Fortunately, this application structure doesn't prevent us from tidying things up with nested folders. For example, if <code>coffee/directives</code> becomes unwieldy, we could start grouping our directives into logical sub-directories. For example, <code>product_form.coffee</code>, <code>product_rating.coffee</code>, and <code>product_result.coffee</code> could move to a <code>products</code> sub-directory, while <code>bag.html</code>, <code>footer.html</code>, and <code>header.html</code> goes into a <code>layout</code> sub-directory, and then <code>accordion.html</code> and <code>modal.html</code> can go to a <code>UI</code> sub-directory. To ensure consistency, the corresponding view template and SCSS files would be grouped into sub-directories to match those of the directives.
+        </p>
 
       </section>
 
